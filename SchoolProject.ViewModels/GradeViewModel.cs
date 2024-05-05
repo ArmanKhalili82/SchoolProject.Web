@@ -15,7 +15,7 @@ public class GradeViewModel
     {
         
     }
-    public GradeViewModel(GradeViewModel grade)
+    public GradeViewModel(Grade grade)
     {
         Id = grade.Id;
         Name = grade.Name;

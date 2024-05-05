@@ -1,0 +1,42 @@
+﻿@using SchoolProject.Utilities;
+@model PagedResult<SchoolProject.ViewModels.GradeViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddGrade">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <th>
+        Id
+    </th>
+    <th>
+        Name
+    </th>
+    <th></th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {})
+                    @Html.ActionLink("Details", "Details", new {})
+                    @Html.ActionLink("Delete", "Delete", new {})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

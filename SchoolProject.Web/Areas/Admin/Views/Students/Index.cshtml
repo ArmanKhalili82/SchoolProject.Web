@@ -1,5 +1,95 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using SchoolProject.Utilities;
+@model PagedResult<SchoolProject.ViewModels.StudentViewModel>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <form asp-action="EnrollStudent">
+        <div class="row">
+            <div class="col-2 m-0">
+                <select class="form-select" name="GradeId" asp-items="@ViewBag.Grades">
+                    <option value="-1">Select Grades</option>
+                </select>
+            </div>
+            <div class="col-2 m-0 text-start">
+                <select class="form-select" name="SessionId" asp-items="@ViewBag.session">
+                    <option value="-1">Select Session</option>
+                </select>
+            </div>
+            <div class="col-2 m-0">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+            <div class="col-4 text-end">
+                <a asp-action="AddStudent" class="btn btn-primary">Create New</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <input typeof="checkbox" id="select-all" name="SelectAll" /> Select All
+                    </th>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Registration Date</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Data.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" asp-for="@Model.Data[i].Selected" />
+                            <input type="hidden" asp-for="@Model.Data[i].Id" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Data[i].Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Data[i].FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Data[i].LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Data[i].DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => @Model.Data[i].DateOfJoin)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new {})
+                            @Html.ActionLink("Details", "Details", new {})
+                            @Html.ActionLink("Delete", "Delete", new {})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            var selectAll = $("#select-all");
+            var studentCheckboxes = $("input:checkbox[name^='Data']");
+
+            selectAll.change(function () {
+                studentCheckboxes.prop('checked', $(this).prop("checked"));
+            });
+
+            studentCheckboxes.change(function () {
+                var allChecked = studentCheckboxes.length === studentCheckboxes.filter(":checked").length;
+                selectAll.prop("checked", allChecked);
+            });
+        })
+    </script>
+
+        
+
