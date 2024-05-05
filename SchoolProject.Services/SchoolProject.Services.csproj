@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolProject.Models\SchoolProject.Models.csproj" />
+    <ProjectReference Include="..\SchoolProject.Repositories\SchoolProject.Repositories.csproj" />
+    <ProjectReference Include="..\SchoolProject.Utilities\SchoolProject.Utilities.csproj" />
+    <ProjectReference Include="..\SchoolProject.ViewModels\SchoolProject.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
